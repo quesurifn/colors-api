@@ -10,6 +10,8 @@ class ColorsController < ApplicationController
 
     def create
         @color = Color.create(color_params)
+        @tag = Tag.find_or_create_by(value: color_params[:tag_value])
+        @color.tags << @tag
         render json: {data: @color}
     end
 
@@ -30,7 +32,7 @@ class ColorsController < ApplicationController
     private
     
     def color_params
-        params.require(:color).permit(:id, :color_one, :color_two, :color_three, :color_four, :color_five, :description)
+        params.require(:color).permit(:id, :color_one, :color_two, :color_three, :color_four, :color_five, :description, tag_attributes: [:value])
     end
     
 end
