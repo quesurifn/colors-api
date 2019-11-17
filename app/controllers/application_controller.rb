@@ -10,7 +10,7 @@ class ApplicationController < ActionController::API
         if header
             begin
                 token = JWTBlacklist.find_by(token: header)
-                isExpired? = Time.now.to_i > token[:expiration] 
+                isExpired? === Time.now.to_i > token[:expiration] 
                 if isExpired?
                     render json: {errors: "token_expired"}, status: :unauthorized
                 end
