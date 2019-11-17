@@ -32,14 +32,15 @@ class UsersController < ApplicationController
 
     def destroy
         @user.destroy
-    end    
+    end
     
     def find_user
         @user = User.find_by_username!(params[:_username])
         rescue ActiveRecord::RecordNotFound
             render json: {errors: 'User Not Found'}, status: :not_found
-        end
     end
+
+    private
 
     def user_params
         params.permit(:avatar, :first_name, :last_name, :bio, :job_title , :company , :password, :password_confirmation, :email)
