@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     before_action :find_user, except: %i[create index]
 
     # GET /users
-    def index 
+    def index
         @users = User.all
         render json: @users, status: :ok
     end
@@ -43,6 +43,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:avatar, :first_name, :last_name, :bio, :job_title , :company , :password, :password_confirmation, :email)
+        params.require(:user).permit(:avatar, :first_name, :last_name, :bio, :job_title , :company , :password, :password_confirmation, :email)
     end
 end
