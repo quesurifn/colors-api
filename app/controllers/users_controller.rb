@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     before_action :authorize_request, except: :create
     before_action :find_user, except: %i[create index]
+    wrap_parameters :user, include: [:avatar, :first_name, :last_name, :bio, :job_title , :company , :password, :email]
 
     # GET /users
     def index
@@ -43,6 +44,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:avatar, :first_name, :last_name, :bio, :job_title , :company , :password, :password_confirmation, :email)
+        params.require(:user).permit(:avatar, :first_name, :last_name, :bio, :job_title , :company , :password, :email)
     end
 end
