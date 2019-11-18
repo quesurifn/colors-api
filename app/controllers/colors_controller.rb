@@ -1,7 +1,7 @@
 require 'csv'
 
 class ColorsController < ApplicationController
-    before_action :authenticate_request!, :except => [:show, :index, :generate, :create]
+    before_action :authorize_request!, :except => [:show, :index, :generate, :create]
 
     def index
         @colors = Color.order(created_at: :desc).take(50)
